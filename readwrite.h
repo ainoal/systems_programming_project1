@@ -1,22 +1,18 @@
 /*******************************************************************/
 /* CT30A3370 Käyttöjärjestelmät ja systeemiohjelmointi
- * reverse.c
+ * readwrite.h
  * Aino Liukkonen
  * 13.4.2021
 /*******************************************************************/
 
-#include <stdio.h>
-#include <stdlib.h>
-#include "readwrite.h"
+struct Node {
+	char string;
+	struct Node *pNext;
+};
 
-int main(void) { 
-	Node *pStart = NULL;
-	char name = testfile.txt;	
+Node *read(char *name);
 
-	pStart = read(name);
-
-	return 0;
-}
+//void write(solmu *pAlku, char *nimi);
 
 /*******************************************************************/
 /* eof */
