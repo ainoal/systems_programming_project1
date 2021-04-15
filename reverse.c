@@ -10,8 +10,8 @@
 #include "readwrite.h"
 
 int main(void) { 
-	Node *pStart = NULL;
-	char name = testfile.txt;	
+	NODE *pStart = NULL;
+	char *name = "testfile.txt";	
 
 	pStart = read(name);
 

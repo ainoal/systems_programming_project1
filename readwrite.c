@@ -14,10 +14,10 @@
 #include "readwrite.h"
 
 /* Reading a file into a linked list */
-Node *read(char *name) {
-	Node *pStart = NULL, *pEnd = NULL, *ptr;
+NODE *read(char *name) {
+	NODE *pStart = NULL, *pEnd = NULL, *ptr;
 	FILE *inputFile;
-	char line;
+	char line[200];
 	char *tok;
 	int i, t, lineCount = 0;	// is lineCount needed anywhere?
 
@@ -30,19 +30,21 @@ Node *read(char *name) {
 	printf("Luetaan inputFile '%s'\n", name); // For testing, get rid of this later
 
 	/* Reading the first line of the file */
+	/* GET RID OF THIS LATER!?)*/
 	if ((fgets(line, 99, inputFile)) == NULL) { 
 		perror("Error while reading the file");
 		exit(1);
 	}
+	printf("jei");
 
 	/* Reading the file line by line */
 	while ((fgets(line, 99, inputFile)) != NULL && strlen(line) > 1) {
-		if ((ptr = (Node*)malloc(sizeof(Node))) == NULL) {
+		if ((ptr = (NODE*)malloc(sizeof(NODE))) == NULL) {
 			perror("Malloc error"); // Correct way to handle malloc error for the project?
 			exit(1);
 		}
 
-		printf(line); 				// TESTING :)
+		printf("line"); 				// TESTING :)
 
 		tok = strtok(line, "\n");
 		strcpy(ptr->string, tok);

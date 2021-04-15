@@ -6,11 +6,13 @@
 /*******************************************************************/
 
 struct Node {
-	char string;
+	char string[200];
 	struct Node *pNext;
 };
 
-Node *read(char *name);
+typedef struct Node NODE;
+
+NODE *read(char *name);
 
 //void write(solmu *pAlku, char *nimi);
 
