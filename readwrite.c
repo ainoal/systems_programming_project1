@@ -13,15 +13,15 @@
 #include <string.h>
 #include "readwrite.h"
 
-/* Reading a file into a linked list */
+/* Function read() reads the contents of an input file and stores
+each line of the file in a linked list */
 NODE *read(char *name) {
 	NODE *pStart = NULL, *pEnd = NULL, *ptr;
 	FILE *inputFile;
 	char line[200];
 	char *tok;
-	int i, t, lineCount = 0;	// is lineCount needed anywhere?
 
-	/* Opening the file */
+	/* Opening the input file */
 	if ((inputFile = fopen(name, "r")) == NULL) {
 		perror("Error while reading the file"); // CORRECT THE ERROR HANDLING FOR THE PROJECT!
 		exit(1);
@@ -29,25 +29,18 @@ NODE *read(char *name) {
 
 	printf("Luetaan inputFile '%s'\n", name); // For testing, get rid of this later
 
-	/* Reading the first line of the file */
-	/* GET RID OF THIS LATER!?)*/
-	if ((fgets(line, 99, inputFile)) == NULL) { 
-		perror("Error while reading the file");
-		exit(1);
-	}
-	printf("jei");
 
 	/* Reading the file line by line */
 	while ((fgets(line, 99, inputFile)) != NULL && strlen(line) > 1) {
 		if ((ptr = (NODE*)malloc(sizeof(NODE))) == NULL) {
-			perror("Malloc error"); // Correct way to handle malloc error for the project?
+			perror("Malloc error while reading a file."); // Correct way to handle malloc error for the project?
 			exit(1);
 		}
 
-		printf("line"); 				// TESTING :)
+		printf(line); 				// TESTING :)
 
 		tok = strtok(line, "\n");
-		strcpy(ptr->string, tok);
+		strcpy(ptr->string, tok);	// Copying the line into a list NODE
 
 
 		ptr->pNext = NULL;
@@ -59,14 +52,32 @@ NODE *read(char *name) {
 			pEnd->pNext = ptr;
 			pEnd = ptr;
 		}
-		lineCount++;
 	}
-									// For testing purposes,
-	printf("Tiedosto '%s' luettu, %d riviä.\n", name, lineCount); 	// unnecessary for the project
-	
+
 	fclose(inputFile);
 
 	return pStart;	
+}
+
+void write(NODE *pStart, char *name) { 		// PASS FILE NAME AS AN ARGUMENT
+	FILE *outputFile;
+	NODE *ptr = pStart;
+
+	/* Opening the output file */
+	if ((outputFile = fopen("testfile2.txt", "w")) == NULL) {
+		printf("Error at writing to a file.\n");
+		exit(1);
+	}
+	
+	/* Write into output file */
+	//fprintf(outputFile, line); 
+	while (ptr != NULL) {
+		fprintf(outputFile, "%s", ptr->string);
+		ptr = ptr->pNext;
+	}
+
+	fclose(outputFile);
+	printf("Woop woop now let's try reverse :)\n");
 }
 
 /*******************************************************************/

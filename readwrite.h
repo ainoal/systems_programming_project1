@@ -14,7 +14,7 @@ typedef struct Node NODE;
 
 NODE *read(char *name);
 
-//void write(solmu *pAlku, char *nimi);
+void write(NODE *pStart, char *name);
 
 /*******************************************************************/
 /* eof */

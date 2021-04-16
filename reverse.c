@@ -14,6 +14,7 @@ int main(void) {
 	char *name = "testfile.txt";	
 
 	pStart = read(name);
+	write(pStart, name);
 
 	return 0;
 }
