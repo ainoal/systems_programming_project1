@@ -3,6 +3,7 @@
  * readwrite.h
  * Aino Liukkonen
  * 13.4.2021
+ */
 /*******************************************************************/
 
 struct Node {
@@ -12,9 +13,9 @@ struct Node {
 
 typedef struct Node NODE;
 
-NODE *read(char *name);
-
-void write(NODE *pStart, char *name);
+NODE *readFile(char *name);
+void reverseLines(NODE **pStart);
+void writeFile(NODE *pStart, char *name);
 
 /*******************************************************************/
 /* eof */

@@ -3,10 +3,8 @@
  * readwrite.c
  * Aino Liukkonen
  * 13.4.2021
+ */
 /*******************************************************************/
-
-// Just dumping this here to see if I can get some inspo:
-// https://www.geeksforgeeks.org/reverse-a-linked-list/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -15,32 +13,30 @@
 
 /* Function read() reads the contents of an input file and stores
 each line of the file in a linked list */
-NODE *read(char *name) {
+NODE *readFile(char *name) {
 	NODE *pStart = NULL, *pEnd = NULL, *ptr;
 	FILE *inputFile;
-	char line[200];
+	char line[200]; // !!!! "YOU MAY NOT ASSUME ANYTHING ABOUT HOW LONG A LINE SHOULD BE" !!!!!!!
 	char *tok;
 
-	/* Opening the input file */
+	/* Open the input file */
 	if ((inputFile = fopen(name, "r")) == NULL) {
-		perror("Error while reading the file"); // CORRECT THE ERROR HANDLING FOR THE PROJECT!
+		perror("malloc failed"); 
 		exit(1);
 	}
 
 	printf("Luetaan inputFile '%s'\n", name); // For testing, get rid of this later
 
 
-	/* Reading the file line by line */
+	/* Read the file line by line */
 	while ((fgets(line, 99, inputFile)) != NULL && strlen(line) > 1) {
 		if ((ptr = (NODE*)malloc(sizeof(NODE))) == NULL) {
-			perror("Malloc error while reading a file."); // Correct way to handle malloc error for the project?
+			perror("malloc failed");
 			exit(1);
 		}
 
-		printf(line); 				// TESTING :)
-
 		tok = strtok(line, "\n");
-		strcpy(ptr->string, tok);	// Copying the line into a list NODE
+		strcpy(ptr->string, tok);	// Copy the line into a list NODE
 
 
 		ptr->pNext = NULL;
@@ -59,12 +55,29 @@ NODE *read(char *name) {
 	return pStart;	
 }
 
-void write(NODE *pStart, char *name) { 		// PASS FILE NAME AS AN ARGUMENT
+/* Function to reverse the linked list and thereby reverse the order
+of input lines. Reference: 
+https://www.geeksforgeeks.org/reverse-a-linked-list/ */
+void reverseLines(NODE **pStart) {
+	NODE *pPrev = NULL, *pNext = NULL;
+	NODE *ptr = *pStart;
+
+	while(ptr != NULL) {
+		pNext = ptr->pNext;		// Store the next node
+		ptr->pNext = pPrev;		// Reverse the current node's pointer
+		
+		pPrev = ptr;			// Move the pointers one position
+		ptr = pNext;			// ahead in the linked list
+	}
+	*pStart = pPrev;
+}
+
+void writeFile(NODE *pStart, char *name) { 
 	FILE *outputFile;
 	NODE *ptr = pStart;
 
-	/* Opening the output file */
-	if ((outputFile = fopen("testfile2.txt", "w")) == NULL) {
+	/* Open the output file */
+	if ((outputFile = fopen(name, "w")) == NULL) {
 		printf("Error at writing to a file.\n");
 		exit(1);
 	}
@@ -72,12 +85,11 @@ void write(NODE *pStart, char *name) { 		// PASS FILE NAME AS AN ARGUMENT
 	/* Write into output file */
 	//fprintf(outputFile, line); 
 	while (ptr != NULL) {
-		fprintf(outputFile, "%s", ptr->string);
+		fprintf(outputFile, "%s\n", ptr->string);
 		ptr = ptr->pNext;
 	}
 
 	fclose(outputFile);
-	printf("Woop woop now let's try reverse :)\n");
 }
 
 /*******************************************************************/
