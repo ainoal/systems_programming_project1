@@ -13,9 +13,11 @@ struct Node {
 
 typedef struct Node NODE;
 
-NODE *readFile(char *name);
+NODE *readFile(char *fileName);
 void reverseLines(NODE **pStart);
-void writeFile(NODE *pStart, char *name);
+FILE *openFile(NODE *pStart, char *fileName);
+void write(FILE *outputFile, NODE *pStart);
+void freeNodes(NODE *pStart);
 
 /*******************************************************************/
 /* eof */

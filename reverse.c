@@ -11,19 +11,26 @@
 #include "readwrite.h"
 
 int main(int argc, char *argv[]) { 
-	NODE *pStart = NULL;	
+	NODE *pStart = NULL;
+	FILE *fp;	
 
 	switch (argc) {
 		case 1:
-			printf("1 arg, not working yet\n");
+			printf("not working yet");
 			break;
 		case 2:
-			printf("2 args, not working yet\n");
+			pStart = readFile(argv[1]);
+			reverseLines(&pStart);
+			write(stdout, pStart);
+			freeNodes(pStart);
 			break;
 		case 3:
 			pStart = readFile(argv[1]);
 			reverseLines(&pStart);
-			writeFile(pStart, argv[2]);
+			fp = openFile(pStart, argv[2]);
+			write(fp, pStart);
+			fclose(fp);
+			freeNodes(pStart);
 			break;
 		default:
 			printf("usage: reverse <input> <output>\n");

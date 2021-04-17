@@ -13,20 +13,17 @@
 
 /* Function read() reads the contents of an input file and stores
 each line of the file in a linked list */
-NODE *readFile(char *name) {
+NODE *readFile(char *fileName) {
 	NODE *pStart = NULL, *pEnd = NULL, *ptr;
 	FILE *inputFile;
 	char line[200]; // !!!! "YOU MAY NOT ASSUME ANYTHING ABOUT HOW LONG A LINE SHOULD BE" !!!!!!!
 	char *tok;
 
 	/* Open the input file */
-	if ((inputFile = fopen(name, "r")) == NULL) {
+	if ((inputFile = fopen(fileName, "r")) == NULL) {
 		perror("malloc failed"); 
 		exit(1);
 	}
-
-	printf("Luetaan inputFile '%s'\n", name); // For testing, get rid of this later
-
 
 	/* Read the file line by line */
 	while ((fgets(line, 99, inputFile)) != NULL && strlen(line) > 1) {
@@ -72,24 +69,37 @@ void reverseLines(NODE **pStart) {
 	*pStart = pPrev;
 }
 
-void writeFile(NODE *pStart, char *name) { 
+FILE *openFile(NODE *pStart, char *fileName) { 
 	FILE *outputFile;
-	NODE *ptr = pStart;
 
 	/* Open the output file */
-	if ((outputFile = fopen(name, "w")) == NULL) {
+	if ((outputFile = fopen(fileName, "w")) == NULL) {
 		printf("Error at writing to a file.\n");
 		exit(1);
 	}
-	
+
+	return outputFile;
+}
+
+void write(FILE *outputFile, NODE *pStart) {
+	NODE *ptr = pStart;
+
 	/* Write into output file */
-	//fprintf(outputFile, line); 
 	while (ptr != NULL) {
 		fprintf(outputFile, "%s\n", ptr->string);
 		ptr = ptr->pNext;
 	}
+}
 
-	fclose(outputFile);
+void freeNodes(NODE *pStart) {
+	NODE *ptr = pStart;
+	int i = 0;
+
+	while (ptr != NULL) {
+		pStart = ptr->pNext;
+		free(ptr);
+		ptr = pStart;
+	}
 }
 
 /*******************************************************************/
