@@ -1,6 +1,6 @@
 reverse: readwrite.o reverse.o
-	gcc reverse.o readwrite.o -o reverse -std=c99 -Wall -Wno-comment -pedantic
+	gcc reverse.o readwrite.o -o reverse -Wall -pedantic
 reverse.o: reverse.c readwrite.h
-	gcc reverse.c -c -std=c99 -Wall -Wno-comment -pedantic
+	gcc reverse.c -c -Wall -pedantic
 readwrite.o: readwrite.c readwrite.h
-	gcc readwrite.c -c -std=c99 -Wall -Wno-comment -pedantic
+	gcc readwrite.c -c -Wall -pedantic

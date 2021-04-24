@@ -16,7 +16,11 @@ int main(int argc, char *argv[]) {
 
 	switch (argc) {
 		case 1:
-			printf("not working yet");
+			// each line as nodes into a linked list
+			//pStart = readStdin(); // this function into readwrite.c
+			//reverseLines(&pStart);
+			//write(stdout, pStart);
+			//freeNodes(pStart);
 			break;
 		case 2:
 			pStart = readFile(argv[1]);

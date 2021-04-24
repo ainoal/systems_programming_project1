@@ -7,7 +7,7 @@
 /*******************************************************************/
 
 struct Node {
-	char string[200];
+	char *string;
 	struct Node *pNext;
 };
 

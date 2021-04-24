@@ -16,25 +16,30 @@ each line of the file in a linked list */
 NODE *readFile(char *fileName) {
 	NODE *pStart = NULL, *pEnd = NULL, *ptr;
 	FILE *inputFile;
-	char line[200]; // !!!! "YOU MAY NOT ASSUME ANYTHING ABOUT HOW LONG A LINE SHOULD BE" !!!!!!!
-	char *tok;
+	char *buffer;
+	size_t bufferSize = 0;
+	ssize_t lineLen;
 
-	/* Open the input file */
+	/* Open the input file b*/
 	if ((inputFile = fopen(fileName, "r")) == NULL) {
-		perror("malloc failed"); 
+		perror("Error at opening file\n"); // ??
 		exit(1);
 	}
 
 	/* Read the file line by line */
-	while ((fgets(line, 99, inputFile)) != NULL && strlen(line) > 1) {
+	while ((lineLen = getline(&buffer, &bufferSize, inputFile)) > 0) {
 		if ((ptr = (NODE*)malloc(sizeof(NODE))) == NULL) {
-			perror("malloc failed");
+			perror("malloc failed\n");
+			exit(1);	
+		}
+
+		/* Allocate memory for new ptr->string */
+		if ((ptr->string = malloc (strlen (buffer) + 1)) == NULL) {
+		    perror ("malloc failed\n");
 			exit(1);
 		}
 
-		tok = strtok(line, "\n");
-		strcpy(ptr->string, tok);	// Copy the line into a list NODE
-
+		strcpy (ptr->string, buffer);  // Copy the line into a list NODE
 
 		ptr->pNext = NULL;
 		if (pStart == NULL) { 		// If the list is empty
@@ -86,14 +91,13 @@ void write(FILE *outputFile, NODE *pStart) {
 
 	/* Write into output file */
 	while (ptr != NULL) {
-		fprintf(outputFile, "%s\n", ptr->string);
+		fprintf(outputFile, "%s", ptr->string);
 		ptr = ptr->pNext;
 	}
 }
 
 void freeNodes(NODE *pStart) {
 	NODE *ptr = pStart;
-	int i = 0;
 
 	while (ptr != NULL) {
 		pStart = ptr->pNext;
