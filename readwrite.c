@@ -57,6 +57,45 @@ NODE *readFile(char *fileName) {
 	return pStart;	
 }
 
+/* Function readStdio() reads each line from stdin into a linked list */
+NODE *readStdin() {
+	NODE *pStart = NULL, *pEnd = NULL, *ptr;
+	char *buffer;
+	size_t bufferSize = 0;
+
+	if((buffer = (char *)malloc(bufferSize * sizeof(char))) == NULL) {
+		perror("Malloc error\n");
+		exit(1);
+	}
+	
+	while (getline(&buffer, &bufferSize, stdin) != -1) {	
+		if ((ptr = (NODE*)malloc(sizeof(NODE))) == NULL) {
+			perror("malloc failed\n");
+			exit(1);
+		}
+
+		/* Allocate memory for new ptr->string */
+		if ((ptr->string = malloc (strlen (buffer) + 1)) == NULL) {
+			perror ("malloc failed\n");
+			exit(1);
+		}
+
+		strcpy (ptr->string, buffer);  // Copy the line into a list NODE
+
+		ptr->pNext = NULL;
+		if (pStart == NULL) { 		// If the list is empty
+			pStart = ptr;
+			pEnd = ptr;
+		}
+		else { 						// If there are already nodes in the list
+			pEnd->pNext = ptr;
+			pEnd = ptr;
+		}
+	}
+	
+	return pStart;
+}
+
 /* Function to reverse the linked list and thereby reverse the order
 of input lines. Reference: 
 https://www.geeksforgeeks.org/reverse-a-linked-list/ */

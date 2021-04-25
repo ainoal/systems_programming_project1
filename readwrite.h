@@ -14,6 +14,7 @@ struct Node {
 typedef struct Node NODE;
 
 NODE *readFile(char *fileName);
+NODE *readStdin();
 void reverseLines(NODE **pStart);
 FILE *openFile(NODE *pStart, char *fileName);
 void write(FILE *outputFile, NODE *pStart);
