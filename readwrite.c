@@ -20,22 +20,22 @@ NODE *readFile(char *fileName) {
 	size_t bufferSize = 0;
 	ssize_t lineLen;
 
-	/* Open the input file b*/
+	/* Open the input file */
 	if ((inputFile = fopen(fileName, "r")) == NULL) {
-		perror("Error at opening file\n"); // ??
+		fprintf(stderr, "error: cannot open file 'input.txt'\n"); 
 		exit(1);
 	}
 
 	/* Read the file line by line */
 	while ((lineLen = getline(&buffer, &bufferSize, inputFile)) > 0) {
 		if ((ptr = (NODE*)malloc(sizeof(NODE))) == NULL) {
-			perror("malloc failed\n");
+			fprintf(stderr, "malloc failed\n");
 			exit(1);	
 		}
 
 		/* Allocate memory for new ptr->string */
 		if ((ptr->string = malloc (strlen (buffer) + 1)) == NULL) {
-		    perror ("malloc failed\n");
+		    fprintf(stderr, "malloc failed\n");
 			exit(1);
 		}
 
@@ -64,19 +64,19 @@ NODE *readStdin() {
 	size_t bufferSize = 0;
 
 	if((buffer = (char *)malloc(bufferSize * sizeof(char))) == NULL) {
-		perror("Malloc error\n");
+		fprintf(stderr, "malloc failed\n");
 		exit(1);
 	}
 	
 	while (getline(&buffer, &bufferSize, stdin) != -1) {	
 		if ((ptr = (NODE*)malloc(sizeof(NODE))) == NULL) {
-			perror("malloc failed\n");
+			fprintf(stderr, "malloc failed\n");
 			exit(1);
 		}
 
 		/* Allocate memory for new ptr->string */
 		if ((ptr->string = malloc (strlen (buffer) + 1)) == NULL) {
-			perror ("malloc failed\n");
+			fprintf(stderr, "malloc failed\n");
 			exit(1);
 		}
 
@@ -118,7 +118,7 @@ FILE *openFile(NODE *pStart, char *fileName) {
 
 	/* Open the output file */
 	if ((outputFile = fopen(fileName, "w")) == NULL) {
-		printf("Error at writing to a file.\n");
+		fprintf(stderr, "error: cannot open file 'input.txt'\n");
 		exit(1);
 	}
 
