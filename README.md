@@ -6,8 +6,8 @@ This program reads in the data from an input file and reverses it so that the la
 
 The program can be invoked with 0, 1 or 2 command-line arguments. It should be invoked in one of the following ways:<br></br>
 
-./reverse
-./reverse input.txt
+./reverse  
+./reverse input.txt  
 ./reverse input.txt output.txt<br></br>
 
 When invoked with no arguments, the program reads from stdin and writes to stdout. When invoked with 1 command, it reads from input file and writes to stdout. And finally, when invoked with 2 arguments, it reads from input file and writes to output file.<br></br>
