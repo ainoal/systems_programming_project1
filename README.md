@@ -14,14 +14,14 @@ When invoked with no arguments, the program reads from stdin and writes to stdou
 
 If, for example an input file looks like this:<br></br>
 
-1st line
-2nd line
-3rd line
+1st line<br></br>
+2nd line<br></br>
+3rd line<br></br>
 4th line<br></br>
 
 then output file will look like this:<br></br>
 
-4th line
-3th line
-2nd line
-1st line
+4th line<br></br>
+3th line<br></br>
+2nd line<br></br>
+1st line<br></br>
