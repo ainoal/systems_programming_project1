@@ -1,6 +1,6 @@
 # Käyttöjärjestelmät ja systeemiohjelmointi: project 1
 Reverse - a part of my systems programming course project</br></br>
-This program reads in the data from an input file and reverses it so that the last line is printed first and the first line is printed last. This repository includes a Makefile, and the program can be compiled by running "make" on the command line. 
+This program reads in the data from an input file and reverses it so that the last line is printed first and the first line is printed last. This repository includes a Makefile, and the program can be compiled by running "make" on the command line. The project instructions can be found in [ostep-projects repository](https://github.com/remzi-arpacidusseau/ostep-projects/tree/master/initial-reverse)
 
 ## Running
 
