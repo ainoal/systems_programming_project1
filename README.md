@@ -12,16 +12,16 @@ The program can be invoked with 0, 1 or 2 command-line arguments. It should be i
 
 When invoked with no arguments, the program reads from stdin and writes to stdout. When invoked with 1 command, it reads from input file and writes to stdout. And finally, when invoked with 2 arguments, it reads from input file and writes to output file.<br></br>
 
-If, for example an input file looks like this:<br></br>
+If, for example, an input file looks like this:<br></br>
 
-1st line<br></br>
-2nd line<br></br>
-3rd line<br></br>
-4th line<br></br>
+1st line  
+2nd line  
+3rd line  
+4th line  
 
 then output file will look like this:<br></br>
 
-4th line<br></br>
-3th line<br></br>
-2nd line<br></br>
-1st line<br></br>
+4th line  
+3th line  
+2nd line  
+1st line  
